@@ -3,12 +3,11 @@ import numpy as np
 
 
 # Load data
-pwt90 = pd.read_stata('https://www.rug.nl/ggdc/docs/pwt90.dta')
 pwt1001 = pd.read_stata('https://dataverse.nl/api/access/datafile/354098')
 
 # Filter and select relevant columns
-data = pwt90.loc[pwt90['country'].isin(["Australia", "Austria"])][['year', 'countrycode', 'rgdpna', 'rkna', 'emp', 'labsh']]
-data = data.loc[(data['year'] >= 2000) & (data['year'] <= 2015)].dropna()
+data = pwt1001.loc[pwt1001['country'].isin(["Australia", "Austria"])][['year', 'countrycode', 'rgdpna', 'rkna', 'emp', 'labsh']]
+data = data.loc[(data['year'] >= 1995) & (data['year'] <= 2019)].dropna()
 
 # Calculate additional columns
 data['y_pc'] = np.log(data['rgdpna'] / data['emp'])  # GDP per worker
